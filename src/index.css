@@ -1,0 +1,35 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+
+  /**  PRIMARY COLORS */
+  --color-dark-blue: hsl(238, 40%, 52%);
+  --color-light-blue: hsl(239, 57%, 85%);
+  --color-dark-red: hsl(358, 79%, 66%);
+  --color-light-red: hsl(357, 100%, 86%);
+
+  /** NEUTRAL COLORS  */
+  --color-grayer-blue: hsl(212, 24%, 26%);
+  --color-gray-blue: hsl(211, 10%, 45%);
+  --color-dark-gray: hsl(223, 19%, 93%);
+  --color-light-gray: hsl(228, 33%, 97%);
+  --color-white: hsl(0, 0%, 100%);
+}
+
+*,
+*::before,
+*::after {
+  font-size: 62.5%;
+  box-sizing: inherit;
+}
+
+html {
+  font-family: ;
+}
+
+body {
+  box-sizing: border-box;
+}
