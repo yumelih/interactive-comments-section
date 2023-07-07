@@ -1,13 +1,13 @@
 // import { useState } from "react";
 
-import Comment from "./components/Comment";
+import Post from "./components/Post";
 // import iconDelete from "./assets/icon-delete.svg";
 
 function App() {
   return (
-    <>
-      <Comment />
-    </>
+    <div className="container">
+      <Post />
+    </div>
   );
 }
 
