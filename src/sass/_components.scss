@@ -1,27 +1,5 @@
 //# POST
 
-.post {
-  display: grid;
-  grid-template-columns: 10% 90%;
-  gap: 1rem;
-  min-height: 10rem;
-  font-size: 1.6rem;
-  & > * {
-    padding: 1rem;
-  }
-
-  &__vote {
-    background-color: burlywood;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-  }
-
-  &__main {
-    background-color: burlywood;
-  }
-}
-
 //# UPVOTE - DOWNVOTE COUNT
 .vote-container {
   height: 10rem;
@@ -82,7 +60,7 @@
   align-items: center;
 
   & > *:not(:last-child) {
-    margin-right: 1rem;
+    margin-right: 1.5rem;
   }
 }
 
@@ -93,9 +71,12 @@
 
 .username {
   font-weight: 700;
+  color: var(--color-greyer-blue);
 }
 
 .post-date {
+  font-weight: 400;
+  color: var(--color-grey-blue);
 }
 
 .user-interaction {
@@ -120,5 +101,37 @@
 
   &:hover {
     opacity: 70%;
+  }
+}
+
+.post__bottom {
+  hyphens: auto;
+}
+
+.post__text {
+  font-weight: 400;
+  color: var(--color-grey-blue);
+}
+
+// Reply button
+.reply {
+  padding: 1.3rem 2.3rem;
+  text-transform: uppercase;
+  background-color: var(--color-dark-blue);
+  color: var(--color-white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  transition: all 0.2s;
+
+  &:hover {
+    opacity: 80%;
+  }
+
+  &:active {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   }
 }

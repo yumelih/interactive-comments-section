@@ -3,19 +3,12 @@ import iconMinus from "../assets/icon-minus.svg";
 
 import iconReply from "../assets/icon-reply.svg";
 import PropTypes from "prop-types";
-import { useState } from "react";
-import Comment from "./Comment";
 import moment from "moment";
 
-function Post({ data, onAddRepliedPost }) {
-  const [replying, setReplying] = useState(false);
-
-  function handleReply() {
-    setReplying(true);
-  }
-
+function RepliedPost({ replyData }) {
   return (
-    <div className="main ">
+    <div className="main main--replied">
+      <div className="replied"></div>
       <div className="post">
         <div className="post__vote">
           <div className="vote-container">
@@ -24,7 +17,7 @@ function Post({ data, onAddRepliedPost }) {
               alt="plus icon"
               className="vote-container__plus-icon"
             />
-            <span className="vote-container__number">{data.score}</span>
+            <span className="vote-container__number">{replyData.score}</span>
             <img
               src={iconMinus}
               alt="minus icon"
@@ -36,18 +29,18 @@ function Post({ data, onAddRepliedPost }) {
           <div className="post__up">
             <div className="user-details">
               <img
-                src={data.user.image.png}
+                src={replyData.user.image.png}
                 alt="user avatar"
                 className="avatar"
               />
-              <span className="username">{data.user.username}</span>
+              <span className="username">{replyData.user.username}</span>
               <span className="post-date">
-                {data.createdAt.includes("ago")
-                  ? data.createdAt
-                  : moment(data.createdAt).toNow()}
+                {replyData.createdAt.includes("ago")
+                  ? replyData.createdAt
+                  : moment(replyData.createdAt).toNow()}
               </span>
             </div>
-            <div className="user-interaction" onClick={handleReply}>
+            <div className="user-interaction">
               <img
                 src={iconReply}
                 alt=""
@@ -61,24 +54,17 @@ function Post({ data, onAddRepliedPost }) {
               {/* Impressive! Though it seems the drag feature could be improved. But
             overall it looks incredible. You&apos;ve nailed the design and
             responsiveness at various breakpoints works reall well.{" "} */}
-              {data.content}
+              {replyData.content}
             </p>
           </div>
         </div>
       </div>
-      {replying && (
-        <Comment
-          replying={replying}
-          postId={data.id}
-          onAddRepliedPost={onAddRepliedPost}
-        />
-      )}
     </div>
   );
 }
 
-Post.propTypes = {
-  data: PropTypes.object,
+RepliedPost.propTypes = {
+  replyData: PropTypes.object,
 };
 
-export default Post;
+export default RepliedPost;

@@ -40,7 +40,7 @@ body {
   font-weight: 400;
   line-height: 1.5;
 
-  background-color: var(--color-greyer-blue);
+  background-color: var(--color-light-grey);
 }
 
 /* CONTAINER */
@@ -48,4 +48,8 @@ body {
 #root {
   width: 100%;
   height: auto;
+}
+
+.hidden {
+  display: none;
 }
