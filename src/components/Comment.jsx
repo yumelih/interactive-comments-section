@@ -99,6 +99,7 @@ const Comment = function ({
         name="message"
         value={formData.message}
         onChange={handleChange}
+        placeholder="Add a comment..."
       ></textarea>
 
       {inputError && <div style={{ color: "red" }}>{inputError}</div>}

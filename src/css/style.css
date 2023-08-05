@@ -138,12 +138,32 @@ img[disabled] {
   .comment .avatar {
     width: 4rem;
     height: 4rem; }
+    @media only screen and (max-width: 37.5em) {
+      .comment .avatar {
+        margin: 0;
+        justify-self: start; } }
   .comment .textarea {
     padding: 1rem;
     flex: 0 1 80%; }
-  @media only screen and (max-width: 56.25em) {
+    @media only screen and (max-width: 37.5em) {
+      .comment .textarea {
+        padding: 0;
+        margin: 0;
+        flex: none;
+        grid-row: 1;
+        grid-column: 1 / -1; } }
+  @media only screen and (max-width: 37.5em) {
     .comment {
-      min-height: auto; } }
+      min-height: unset;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 1fr;
+      gap: 1rem;
+      align-items: center; } }
+
+textarea::placeholder {
+  padding: 0.1rem; }
 
 .vote-container {
   height: 10rem;
@@ -242,6 +262,9 @@ img[disabled] {
     opacity: 80%; }
   .reply:active {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; }
+  @media only screen and (max-width: 37.5em) {
+    .reply {
+      justify-self: end; } }
 
 .user-icons {
   display: flex; }
