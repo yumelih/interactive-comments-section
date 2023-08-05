@@ -1,3 +1,6 @@
+$bg-small: 37.5em;
+$bg-medium: 56.25em;
+
 :root {
   /**  PRIMARY COLORS */
   --color-dark-blue: hsl(238, 40%, 52%);
@@ -17,6 +20,9 @@
 
   --filter-color-dark-grey: invert(96%) sepia(5%) saturate(1876%)
     hue-rotate(186deg) brightness(104%) contrast(89%);
+
+  --filter--color-dark-red: invert(47%) sepia(77%) saturate(397%)
+    hue-rotate(309deg) brightness(93%) contrast(105%);
 }
 
 * {
@@ -33,23 +39,43 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+
+  @media only screen and (max-width: $bg-small) {
+    font-size: 55%;
+  }
 }
 
 body {
   font-family: "Rubik", sans-serif;
   font-weight: 400;
   line-height: 1.5;
-
   background-color: var(--color-light-grey);
+  justify-content: center;
+  align-items: center;
 }
 
 /* CONTAINER */
 
+.app {
+  position: relative;
+}
+
 #root {
+  height: 100%;
   width: 100%;
-  height: auto;
+  position: relative;
 }
 
 .hidden {
   display: none;
+}
+
+img[disabled] {
+  pointer-events: none;
+  opacity: 0.7;
+  filter: var(--filter--color-dark-red);
+}
+
+.reply-text {
+  color: var(--color-light-blue);
 }

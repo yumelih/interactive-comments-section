@@ -1,17 +1,30 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import moment from "moment";
 
-// eslint-disable-next-line react/prop-types
-const Comment = function ({ onAddPost, replying, postId, onAddpRepliedPost }) {
-  const [formData, setFormData] = useState({ message: "" });
+const Comment = function ({
+  onAddPost,
+  replying,
+  postId,
+  onAddRepliedPost,
+  onReplying,
+  replyingTo,
+  editing = false,
+  onEdit,
+  onEditing,
+  postContent,
+  parentId,
+}) {
+  const [formData, setFormData] = useState({
+    message: editing ? postContent : replying ? `@${replyingTo}` : "",
+  });
   const [inputError, setInputError] = useState("");
   const minMessageLength = 5;
 
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    console.log(formData.message);
   }
 
   const handleSubmit = (event) => {
@@ -40,29 +53,42 @@ const Comment = function ({ onAddPost, replying, postId, onAddpRepliedPost }) {
         }, 1500);
       }
     } else {
-      onAddpRepliedPost(postId, {
-        id: nanoid(),
-        content: formData.message,
-        createdAt: moment(Date.now().toString()).format(
-          "MMMM Do YYYY, h:mm:ss a"
-        ),
-        score: 0,
-        user: {
-          image: {
-            png: "./images/avatars/image-juliusomo.png",
-            webp: "./images/avatars/image-juliusomo.webp",
+      if (formData.message.length > minMessageLength) {
+        onAddRepliedPost(postId, {
+          id: nanoid(),
+          content: formData.message,
+          createdAt: moment().toString(),
+          score: 0,
+          user: {
+            image: {
+              png: "./images/avatars/image-juliusomo.png",
+              webp: "./images/avatars/image-juliusomo.webp",
+            },
+            username: "juliusomo",
           },
-          username: "juliusomo",
-        },
-        replies: [],
-      });
+          replyingTo,
+          replies: [],
+        });
+        onReplying(false);
+      } else {
+        setInputError(`Input must be more than ${minMessageLength} characters`);
+        setTimeout(() => {
+          setInputError("");
+        }, 1500);
+      }
     }
   };
+
+  function handleEdit() {
+    console.log(postId, onEdit, onEditing, editing);
+    onEdit(parentId, postId, formData.message);
+    onEditing(false);
+  }
 
   return (
     <div className="comment">
       <img
-        src="/images/avatars/image-maxblagun.png"
+        src="/images/avatars/image-juliusomo.png"
         className="avatar comment__avatar"
       />
       <textarea
@@ -74,8 +100,9 @@ const Comment = function ({ onAddPost, replying, postId, onAddpRepliedPost }) {
         value={formData.message}
         onChange={handleChange}
       ></textarea>
+
       {inputError && <div style={{ color: "red" }}>{inputError}</div>}
-      <button onClick={handleSubmit} className="reply">
+      <button onClick={editing ? handleEdit : handleSubmit} className="reply">
         {replying ? "Reply" : "Send"}
       </button>
     </div>

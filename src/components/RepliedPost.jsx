@@ -4,8 +4,31 @@ import iconMinus from "../assets/icon-minus.svg";
 import iconReply from "../assets/icon-reply.svg";
 import PropTypes from "prop-types";
 import moment from "moment";
+import { useState } from "react";
 
-function RepliedPost({ replyData }) {
+function RepliedPost({ postId, replyData, onUpdateReplyScore }) {
+  const [disabledPlusReply, setDisabledReplyPlus] = useState(false);
+  const [disabledMinusReply, setDisabledReplyMinus] = useState(false);
+  console.log(postId, replyData.id);
+
+  function handleReplyScore(postId, replyId, score, type) {
+    if (type === "upvote" && disabledMinusReply === true) {
+      setDisabledReplyPlus(true);
+      onUpdateReplyScore(postId, replyId, score + 1);
+      setDisabledReplyMinus(false);
+    } else if (type === "downvote" && disabledPlusReply === true) {
+      setDisabledReplyMinus(true);
+      onUpdateReplyScore(postId, replyId, score - 1);
+      setDisabledReplyPlus(false);
+    } else if (type === "upvote") {
+      setDisabledReplyPlus(true);
+      onUpdateReplyScore(postId, replyId, score);
+    } else if (type === "downvote") {
+      setDisabledReplyMinus(true);
+      onUpdateReplyScore(postId, replyId, score);
+    }
+  }
+
   return (
     <div className="main main--replied">
       <div className="replied"></div>
@@ -16,12 +39,20 @@ function RepliedPost({ replyData }) {
               src={iconPlus}
               alt="plus icon"
               className="vote-container__plus-icon"
+              disabled={disabledPlusReply}
+              onClick={() =>
+                handleReplyScore(postId, replyData.id, 1, "upvote")
+              }
             />
             <span className="vote-container__number">{replyData.score}</span>
             <img
               src={iconMinus}
               alt="minus icon"
               className="vote-container__minus-icon"
+              disabled={disabledMinusReply}
+              onClick={() =>
+                handleReplyScore(postId, replyData.id, -1, "downvote")
+              }
             />
           </div>
         </div>
@@ -64,7 +95,9 @@ function RepliedPost({ replyData }) {
 }
 
 RepliedPost.propTypes = {
+  postId: PropTypes.number,
   replyData: PropTypes.object,
+  onUpdateReplyScore: PropTypes.func,
 };
 
 export default RepliedPost;
