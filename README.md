@@ -38,7 +38,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Frontend Mentors Solution](https://www.frontendmentor.io/solutions/interactive-comment-section-using-react-and-sass-4T5re2xdtA)
 - Live Site URL: [Live Site](https://interactive-comments-section-five-sigma.vercel.app/)
 
 ## My process
